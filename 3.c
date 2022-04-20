@@ -1,42 +1,66 @@
-//学习-编写判断一个正整数是否为素数的函数
+//选择排序
 #include <stdio.h>
-int prime(int m)
+#include<stdlib.h>
+#define N 100
+void swapmin(int* p, int n)
 {
-	int i;
-	if(m==1)
+	int i = 0;
+	int get = 0;
+	int min = 100000;
+	for (i = 0; i < n - 1; i++)
 	{
-		return 0;
-	}
-	else if(m==2)
-	{
-		return 1;
-	}
-	else
-	{
-		for(i=2;i<m;i++)
-	{
-		if(!(m%i))
+		if (p[i] <= p[i + 1] && p[i] <= min)
 		{
-			return 0;
+			min = p[i];
+		}
+		else if (p[i + 1] <= p[i] && p[i + 1] <= min)
+		{
+ 			min = p[i + 1];
+ 		}
+		else
+		{
+			min = min;
 		}
 	}
-	return 1;
+	for (i = 0; i < n; i++)
+	{
+		if (p[i] == min)
+		{
+			get = i;
+			break;
+		}
 	}
-
-}                         //prime()函数声明
+	int tmp = 0;
+	tmp = p[0];
+	p[0] = p[get];
+	p[get] = tmp;
+}
+void Bubble_sort(int* p, int n)
+{
+	int i;
+	for (i = 0; i < n - 1; i++)
+	{
+		swapmin(p + i, n - i);
+		int a = 0;
+		for (a = 0; a < n; a++)
+		{
+			printf("%d ", p[a]);
+		}
+		printf("\n");
+	}
+}
 int main()
 {
-	int a[10],i;  
-	for(i=0;i<10;i++)
+	/********** Begin **********/
+	int i = 0;
+	int count = 0;
+	int arr[N] = { 0 };
+	scanf("%d", &count);
+	for (i = 0; i < count; i++)
 	{
-		scanf("%d",&a[i]); 
+		scanf("%d", arr + i);
 	}
-	for(i=0;i<10;i++)
-	{
-		if(prime(a[i])==1)
-		printf("%d 是素数.\n",a[i]);
-		else
-		printf("%d 不是素数.\n",a[i]);
-	}
-	return 0; 
+	Bubble_sort(arr, count);
+	/********** End **********/
+	return 0;
 }
